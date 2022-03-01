@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <h:head>
+        <f:metadata>
+            <f:viewAction action="#{estrazioniController.initialize()}" />
+        </f:metadata>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template/layout.xhtml">
+            <ui:define name="title">Elenco estrazioni</ui:define>
+
+            <ui:define name="content">
+                <h1>Estrazioni</h1>
+                <ui:fragment rendered="#{estrazioniController.estrazioniPresenti}">
+                    <div class="card">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-1 p-md-1">
+                                <p:outputLabel value="Estrazioni: " for="@next" />
+                                <p:selectOneMenu id="estrazioni" value="#{estrazioniController.idEstrazione}" hideNoSelectionOption="#{not empty estrazioniController.idEstrazione}">      
+                                    <p:ajax process="@this" update="@form" listener="#{estrazioniController.aggiornaDettaglio()}" />
+                                    <f:selectItem itemLabel="Selezionare una voce..." itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItems value="#{estrazioniController.estrazioni}" var="e" itemLabel="#{estrazioniController.formatDescrizione(e)}" itemValue="#{e.id}" />
+                                </p:selectOneMenu>
+                            </div>
+                            <ui:fragment id="dettaglio" rendered="#{not empty estrazioniController.dettaglio}">
+                                <div class="p-field p-col-1 p-md-1">
+                                    <p:outputLabel value="Dettaglio: " for="@next" />
+                                    <p:selectOneMenu id="estrazione" value="#{estrazioniController.dettaglioSelezionato}" hideNoSelectionOption="#{not empty estrazioniController.dettaglioSelezionato}">      
+                                        <p:ajax process="@this" update="@form" listener="#{estrazioniController.aggiornaCampione()}" />
+                                        <f:selectItem itemLabel="Selezionare una voce..." itemValue="#{null}" noSelectionOption="true"/>
+                                        <f:selectItems value="#{estrazioniController.dettaglio}" var="d" itemLabel="#{estrazioniController.formatDettaglio(d)}" itemValue="#{d.id}" />
+                                    </p:selectOneMenu>                                
+                                </div>
+                            </ui:fragment>
+                        </div>
+                    </div>
+
+                    <ui:fragment id="campione" rendered="#{not empty estrazioniController.campione}">
+                        <div class="card">  
+                            <div class="ui-fluid p-formgrid p-grid">
+                                <div class="p-field p-col-4 p-md-4">                                
+                                    <h3>Campione pratiche (#{fn:length(estrazioniController.campione)})</h3>
+                                    <ui:repeat value="#{estrazioniController.campione}" var="c">
+                                        <p:badge value="#{c.idpratica}" styleClass="p-mr-3 spearate" size="large" />
+                                    </ui:repeat>                                
+                                </div>
+
+                                <ui:fragment id="pratiche" rendered="#{not empty estrazioniController.pratiche}">
+                                    <div class="p-field p-col-1 p-md-1">&nbsp;</div>
+                                    <div class="p-field p-col-4 p-md-4">
+                                        <h3>Pratiche estratte (#{fn:length(estrazioniController.pratiche)})</h3>
+                                        <ui:repeat value="#{estrazioniController.pratiche}" var="p">
+                                            <p:badge value="#{p.idpratica}" styleClass="p-mr-2 spearate" size="large" severity="success" />
+                                        </ui:repeat>                                
+                                    </div>
+                                </ui:fragment>
+                            </div>
+                        </div>
+                    </ui:fragment>
+                </ui:fragment>
+                
+                <ui:fragment rendered="#{!estrazioniController.estrazioniPresenti}">
+                    <div class="card">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-4 p-md-4">
+                                <h3>Non esistono estrazioni in archivio. Effettuarne una nuova.</h3>
+                            </div>
+                        </div>
+                    </div>
+                </ui:fragment>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

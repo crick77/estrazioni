@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:body>
+        <ui:composition>
+            <ul class="layout-menu" id="layout-menu">
+                <li class="#{menuController.isView('estrazioni.xhtml') ? 'active-menuitem' : ''}">
+                    <div class="menuitem-root-text mt-3" style="display: block">
+                        USR ESTRAZIONI
+                    </div>
+                    <a href="estrazioni.xhtml" style="display: block">
+                        ESTRAZIONI
+                    </a>
+                </li>
+                <li class="#{menuController.isView('nuova.xhtml') ? 'active-menuitem' : ''}">  
+                    <div class="menuitem-root-text mt-3">
+                        NUOVA
+                    </div>
+                    <a href="nuova.xhtml" style="display: block">
+                        NUOVA
+                    </a>
+                </li>
+                <li class="#{menuController.isView('lavorazione.xhtml') ? 'active-menuitem' : ''}">  
+                    <div class="menuitem-root-text mt-3">
+                        LAVORAZIONE
+                    </div>
+                    <a href="lavorazione.xhtml" style="display: block">
+                        LAVORAZIONE
+                    </a>
+                </li>      
+                <li class="#{menuController.isView('riepilogo.xhtml') ? 'active-menuitem' : ''}">  
+                    <div class="menuitem-root-text mt-3">
+                        RIEPILOGO
+                    </div>
+                    <a href="riepilogo.xhtml" style="display: block">
+                        RIEPILOGO
+                    </a>
+                </li> 
+                <li class="#{menuController.isView('quit.xhtml') ? 'active-menuitem' : ''}">  
+                    <div class="menuitem-root-text mt-3">
+                        ESCI
+                    </div>
+                    <a href="quit.xhtml" style="display: block">
+                        ESCI
+                    </a>
+                </li>
+            </ul>
+        </ui:composition>
+    </h:body>
+</html>
+

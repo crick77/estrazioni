@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:metadata>
+            <f:viewAction action="#{lavorazioneController.initialize()}" />
+        </f:metadata>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template/layout.xhtml">            
+            <ui:define name="title">Estrazioni - In Lavorazione</ui:define>
+
+            <ui:define name="content">                
+                <h1>Estrazione in lavorazione</h1>                
+                <ui:fragment rendered="#{lavorazioneController.presente}">                    
+                    <div class="card">
+                        <div class="ui-fluid">
+                            <h4>Estrazione del #{lavorazioneController.dateFormat(lavorazioneController.dataEstrazione)} riferita a <span style="color: red">#{lavorazioneController.formatAnnoMese(lavorazioneController.annoMese)}</span></h4>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-2 p-md-2">
+                                <h4>Ordinanza 100</h4>
+                            </div>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-2 p-md-2">
+                                <h5>Tipo "A" <h:outputText value="* (#{lavorazioneController.ord100ANum})" styleClass="red" rendered="#{lavorazioneController.ord100ANote}" /></h5>
+                                <p:pickList id="ord100A" value="#{lavorazioneController.ord100A}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
+                            </div>
+                            <div class="p-field p-col-2 p-md-2">
+                                <h5>Tipo "B" <h:outputText value="* (#{lavorazioneController.ord100BNum})" styleClass="red" rendered="#{lavorazioneController.ord100BNote}" /></h5>
+                                <p:pickList id="ord100B" value="#{lavorazioneController.ord100B}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
+                            </div>
+                            <div class="p-field p-col-2 p-md-2">
+                                <h5>Tipo "C" <h:outputText value="* (#{lavorazioneController.ord100CNum})" styleClass="red" rendered="#{lavorazioneController.ord100CNote}" /></h5>
+                                <p:pickList id="ord100C" value="#{lavorazioneController.ord100C}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-2 p-md-2">
+                                <h4>Ordinanza 59</h4>
+                            </div>
+                        </div>
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-2 p-md-2">
+                                <h5>Tipo "A" <h:outputText value="* (#{lavorazioneController.ord59ANum})" styleClass="red" rendered="#{lavorazioneController.ord59ANote}" /></h5>
+                                <p:pickList id="ord59A" value="#{lavorazioneController.ord59A}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
+                            </div>
+                            <div class="p-field p-col-2 p-md-2">
+                                <h5>Tipo "B" <h:outputText value="* (#{lavorazioneController.ord59BNum})" styleClass="red" rendered="#{lavorazioneController.ord59BNote}" /></h5>
+                                <p:pickList id="ord59B" value="#{lavorazioneController.ord59B}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
+                            </div>
+                            <div class="p-field p-col-2 p-md-2">
+                                <h5>Tipo "C" <h:outputText value="* (#{lavorazioneController.ord59CNum})" styleClass="red" rendered="#{lavorazioneController.ord59CNote}" /></h5>
+                                <p:pickList id="ord59C" value="#{lavorazioneController.ord59C}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-1 p-md-1">
+                                <p:commandButton id="save" value="Salva" icon="pi pi-save" action="#{lavorazioneController.salva()}" update="msg" />
+                                <p:tooltip for="save" value="Salva il lavoro temporaneo." position="right"/>
+                            </div>
+                            <div class="p-field p-col-1 p-md-1">
+                                &nbsp;
+                            </div>
+                            <div class="p-field p-col-1 p-md-1">
+                                <p:commandButton id="finish" value="Storicizza" icon="pi pi-history" styleClass="ui-button-success" action="#{lavorazioneController.concludi()}"/>                                    
+                                <p:tooltip for="finish" position="right">
+                                    <h:outputText value="Conclude le operazioni e storicizza l'estrazione."/>
+                                    <br/>
+                                    <h:outputText value="L'estrazione non sarà più modificabile."/>
+                                </p:tooltip>
+                            </div>                            
+                        </div>
+                        <h6>
+                            <h:outputText value="* L'estrazione ha generato un numero inferiore di elementi a causa di ripetizioni e/o estrazioni gi&agrave; presenti nel periodo precedente." styleClass="red" />
+                            <br/>
+                            <h:outputText value="Il valore indicato tra parentesi indica il numero minimo di pratiche che dovrebbero essere sorteggiate." styleClass="red" />
+                        </h6>
+                    </div>
+                    <p:growl id="msg" showDetail="true" escape="false"/>
+                </ui:fragment>
+                <ui:fragment rendered="#{!lavorazioneController.presente}">
+                    <div class="card">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-4 p-md-4">
+                                <h5>Non esista alcuna estrazione in lavorazione. Effettuarne una nuova.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </ui:fragment>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

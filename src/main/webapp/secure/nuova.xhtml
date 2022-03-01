@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <f:metadata>
+            <f:viewAction action="#{nuovaEstrazioneController.initialize()}" />
+        </f:metadata>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template/layout.xhtml">
+            <ui:define name="title">Estrazioni - Nuova</ui:define>
+
+            <ui:define name="content">
+                <h1>Nuova estrazione</h1>
+                <div class="card">
+                    <ui:fragment rendered="#{nuovaEstrazioneController.permesso}">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-2 p-md-2">
+                                <h4>Estrazione del #{nuovaEstrazioneController.dateFormat(nuovaEstrazioneController.dataEstrazione)} riferita a <span style="color: red">#{nuovaEstrazioneController.formatAnnoMese(nuovaEstrazioneController.annoMese)}</span></h4>
+                                <p:panelGrid columns="3">
+                                    <f:facet name="header">                                        
+                                        Parametri
+                                    </f:facet>
+                                                                        
+                                    <h:outputText value="Ord. 100 Tipo A" />
+                                    <p:spinner id="ord100APerc" value="#{nuovaEstrazioneController.ord100APercentuale}" suffix="%" min="1" max="100" />
+                                    <h:outputText value="Pratiche presentate" />
+
+                                    <h:outputText value="Ord. 100 Tipo B" />
+                                    <p:spinner id="ord100BPerc" value="#{nuovaEstrazioneController.ord100BPercentuale}" suffix="%" min="1" max="100" />
+                                    <h:outputText value="Pratiche con il 50% dei lavori effettuati" />
+
+                                    <h:outputText value="Ord. 100 Tipo C" />
+                                    <p:spinner id="ord100CPerc" value="#{nuovaEstrazioneController.ord100CPercentuale}" suffix="%" min="1" max="100" />
+                                    <h:outputText value="Pratiche concluse" />
+
+                                    <h:outputText value="Ord. 59 Tipo A" />
+                                    <p:spinner id="ord59APerc" value="#{nuovaEstrazioneController.ord59APercentuale}" suffix="%" min="1" max="100" />
+                                    <h:outputText value="Pratiche presentate" />
+
+                                    <h:outputText value="Ord. 59 Tipo B" />
+                                    <p:spinner id="ord59BPerc" value="#{nuovaEstrazioneController.ord59BPercentuale}" suffix="%" min="1" max="100" />
+                                    <h:outputText value="Pratiche con il 50% dei lavori effettuati" />
+
+                                    <h:outputText value="Ord. 59 Tipo C" />
+                                    <p:spinner id="ord59CPerc" value="#{nuovaEstrazioneController.ord59CPercentuale}" suffix="%" min="1" max="100" />
+                                    <h:outputText value="Pratiche concluse" />
+                                </p:panelGrid>
+                                <br/>
+                                <p:commandButton id="procedi" value="Procedi" action="#{nuovaEstrazioneController.effettuaEstrazione()}" icon="pi pi-play" />
+                            </div>
+                        </div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{!nuovaEstrazioneController.permesso}">
+                        <div class="ui-fluid p-formgrid p-grid">
+                            <div class="p-field p-col-4 p-md-4">
+                                <h5>Esiste gi&agrave; un'estrazione storicizzata effettuata nel mese corrente o &egrave; presente un'estrazione in lavorazione.</h5>
+                            </div>
+                        </div>
+                    </ui:fragment>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

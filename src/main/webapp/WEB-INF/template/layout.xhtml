@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>USR ESTRAZIONI - <ui:insert name="title">TEMPLATE</ui:insert></title>
+        <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />        
+        <link rel="stylesheet" id="layout-css" href="#{request.contextPath}/css/themes/saga-blue.css" />        
+        <link rel="stylesheet" href="#{request.contextPath}/css/styles.css" />
+        <link rel="icon" type="image/x-icon" href="#{request.contextPath}/images/favicon.ico" />
+        <style>
+            .red {
+                color: red;
+            }
+            .to-right {
+                width: 100%;
+                text-align: right;
+            }
+            .spearate {
+                margin-bottom: 4px;
+            }
+            .a100 {
+                background-color: lightpink !important;
+            }
+            .b100 {
+                background-color: #ffffb5 !important;
+            }
+            .c100 {
+                background-color: #bffcc6 !important;
+            }
+            .a59 {
+                background-color: #85e3ff !important;
+            }
+            .b59 {
+                background-color: #ffb5e8 !important;
+            }
+            .c59 {
+                background-color: lightblue !important;
+            }
+        </style>       
+    </h:head>
+    <h:body>
+        <h:form id="mainform">
+            <header>
+                <div class="layout-topbar flex align-items-center justify-content-between">
+                    <div class="mobile-menu-wrapper">
+                        <a class="mobile-button" id="mobile-button" ><i class="pi pi-bars"></i></a>                    
+                        <img src="#{request.contextPath}/images/logomain.png" alt="prime" id="mobile-logo" />                    
+                    </div>
+                    <div class="layout-topbar-left">
+                        <div>
+                            <img src="#{request.contextPath}/images/logomain.png" alt="prime" id="topbar-logo" />                        
+                        </div>
+                        <ul class="topbar-menu to-right"><li><span class="pi pi-user" /> Benvenuto, <i>#{utente.username}!</i></li></ul>
+                    </div>                                        
+                </div>
+            </header>
+            <main>
+                <div class="layout-menu-wrapper" id="layout-menu-wrapper" style="width: 180px !important">
+                    <ui:insert name="menu" >
+                        <ui:include src="/WEB-INF/template/menu.xhtml" />
+                    </ui:insert>
+                </div>
+
+                <div class="layout-main" style="margin-left: 180px !important">
+                    <div class="layout-content documentation" id="doc">
+                        <div class="content-wrapper">
+                            <ui:insert name="content" >
+                                CONTENT
+                            </ui:insert>
+                        </div>
+                    </div>                
+                </div>
+
+                <div id="layout-mask" class="layout-mask"></div>
+            </main>
+        </h:form>
+    </h:body>
+</html>

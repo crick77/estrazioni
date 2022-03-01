@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view transient="true">
+        <h:head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />        
+            <!-- Bootstrap CSS -->
+            <link href="css/bootstrap.min.css" rel="stylesheet" />
+            <style>
+                input[type="text"] {
+                    border-bottom-left-radius: 0px;;
+                    border-bottom-right-radius: 0px;;
+                }  
+                input[type="password"] {
+                    border-bottom-left-radius: 0px;;
+                    border-bottom-right-radius: 0px;;
+                }  
+                #grad1 {
+                    height: 200px;
+                    background-color: blue; /* For browsers that do not support gradients */
+                    background-image: linear-gradient(blue,green);
+
+                    .toggle-password {
+                        float: right;
+                        cursor: pointer;
+                        margin-right: 10px;
+                        margin-top: -25px;
+                    }
+
+                </style>
+
+                <title>USR Estrazioni Ispettive - Login</title>
+            </h:head>
+            <h:body>
+                <div class="text-center mt-5">
+                    <div id="grad1"></div>
+                    <h:form style="max-width:300px;margin:auto;">
+                        <img src="images/logo.png" alt="Logo Usr 2016" />
+                        <h1>USR Estrazioni Ispettive</h1>
+                        <h:outputLabel for ="username" styleClass="sr-only" value="Nome utente:" />
+                        <p:inputText id="username" value="#{authController.username}" required="true" styleClass="form-control" requiredMessage="Campo obbligatorio" a:placeholder="Username" a:autofocus="true"/>
+                        <h:outputLabel for ="password" styleClass="sr-only" value="Password:"  />
+                        <label for ="password" class="sr-only"></label>
+                        <p:inputText type="password" id="password" value="#{authController.password}" required="true" requiredMessage="Campo obbligatorio" styleClass="form-control" a:placeholder="Password" />                        
+                        <div class="mt-3">
+                            <h:commandButton action="#{authController.doLogin}" value="Entra" styleClass="mt-3 btn btn-lg btn-primary btn-block" /><br/>                            
+                        </div>
+                        <br/>
+                        <ui:fragment rendered="#{not empty authController.message}">
+                            <div class="alert alert-danger" role="alert">
+                                #{authController.message}
+                            </div>
+                        </ui:fragment>
+                    </h:form>                 
+                </div>
+            </h:body>
+        </f:view>
+    </html>
