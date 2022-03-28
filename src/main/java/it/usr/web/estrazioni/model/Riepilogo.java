@@ -15,7 +15,7 @@ public class Riepilogo extends Mude {
     private int ordinanza;
     private String tipo;
 
-    public Riepilogo(int idPratica, String intestatario, String comune, String indirizzo, String tecnico, String pecTecnico, int ordinanza, String tipo) {
+    public Riepilogo(Integer idPratica, String intestatario, String comune, String indirizzo, String tecnico, String pecTecnico, Integer ordinanza, String tipo) {
         super(idPratica, intestatario, comune, indirizzo, tecnico, pecTecnico);
         this.ordinanza = ordinanza;
         this.tipo = tipo;

@@ -52,7 +52,7 @@ import javax.validation.constraints.Size;
 )
 @NamedNativeQuery(
         name = "Mude.Riepilogo", 
-        query = "SELECT m.idpratica, m.intestatario, m.comune, m.indirizzo, m.tecnico, m.pectecnico, d.ordinanza, d.tipo from pratica p inner join dettaglio d on p.iddettaglio = d.id INNER JOIN estrazione e ON d.idestrazione = e.id LEFT JOIN mude m on p.idpratica = m.idpratica WHERE e.id = ? order by ordinanza desc, tipo", 
+        query = "SELECT p.idpratica, m.intestatario, m.comune, m.indirizzo, m.tecnico, m.pectecnico, d.ordinanza, d.tipo from pratica p inner join dettaglio d on p.iddettaglio = d.id INNER JOIN estrazione e ON d.idestrazione = e.id LEFT JOIN mude m on p.idpratica = m.idpratica WHERE e.id = ? order by ordinanza desc, tipo", 
         resultSetMapping = "Mude.RiepilogoResult"
 )
 public class Mude implements Serializable {
