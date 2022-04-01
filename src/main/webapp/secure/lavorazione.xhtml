@@ -24,20 +24,20 @@
                     </div>
                     <div class="card">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h4>Ordinanza 100</h4>
                             </div>
                         </div>
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h5>Tipo "A" <h:outputText value="* (#{lavorazioneController.ord100ANum})" styleClass="red" rendered="#{lavorazioneController.ord100ANote}" /></h5>
                                 <p:pickList id="ord100A" value="#{lavorazioneController.ord100A}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
                             </div>
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h5>Tipo "B" <h:outputText value="* (#{lavorazioneController.ord100BNum})" styleClass="red" rendered="#{lavorazioneController.ord100BNote}" /></h5>
                                 <p:pickList id="ord100B" value="#{lavorazioneController.ord100B}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
                             </div>
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h5>Tipo "C" <h:outputText value="* (#{lavorazioneController.ord100CNum})" styleClass="red" rendered="#{lavorazioneController.ord100CNote}" /></h5>
                                 <p:pickList id="ord100C" value="#{lavorazioneController.ord100C}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
                             </div>
@@ -46,20 +46,20 @@
 
                     <div class="card">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h4>Ordinanza 59</h4>
                             </div>
                         </div>
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h5>Tipo "A" <h:outputText value="* (#{lavorazioneController.ord59ANum})" styleClass="red" rendered="#{lavorazioneController.ord59ANote}" /></h5>
                                 <p:pickList id="ord59A" value="#{lavorazioneController.ord59A}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
                             </div>
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h5>Tipo "B" <h:outputText value="* (#{lavorazioneController.ord59BNum})" styleClass="red" rendered="#{lavorazioneController.ord59BNote}" /></h5>
                                 <p:pickList id="ord59B" value="#{lavorazioneController.ord59B}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
                             </div>
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h5>Tipo "C" <h:outputText value="* (#{lavorazioneController.ord59CNum})" styleClass="red" rendered="#{lavorazioneController.ord59CNote}" /></h5>
                                 <p:pickList id="ord59C" value="#{lavorazioneController.ord59C}" var="el" itemLabel="#{el}" itemValue="#{el}"/>                                
                             </div>
@@ -68,14 +68,14 @@
 
                     <div class="card">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-1 p-md-1">
+                            <div class="p-field p-md-1">
                                 <p:commandButton id="save" value="Salva" icon="pi pi-save" action="#{lavorazioneController.salva()}" update="msg" />
                                 <p:tooltip for="save" value="Salva il lavoro temporaneo." position="right"/>
                             </div>
-                            <div class="p-field p-col-1 p-md-1">
+                            <div class="p-field p-md-1">
                                 &nbsp;
                             </div>
-                            <div class="p-field p-col-1 p-md-1">
+                            <div class="p-field p-md-1">
                                 <p:commandButton id="finish" value="Storicizza" icon="pi pi-history" styleClass="ui-button-success" action="#{lavorazioneController.concludi()}"/>                                    
                                 <p:tooltip for="finish" position="right">
                                     <h:outputText value="Conclude le operazioni e storicizza l'estrazione."/>
@@ -95,7 +95,7 @@
                 <ui:fragment rendered="#{!lavorazioneController.presente}">
                     <div class="card">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-4 p-md-4">
+                            <div class="p-field p-md-6">
                                 <h5>Non esista alcuna estrazione in lavorazione. Effettuarne una nuova.</h5>
                             </div>
                         </div>

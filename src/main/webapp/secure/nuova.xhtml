@@ -19,7 +19,7 @@
                 <div class="card">
                     <ui:fragment rendered="#{nuovaEstrazioneController.permesso}">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-2 p-md-2">
+                            <div class="p-field p-md-4">
                                 <h4>Estrazione del #{nuovaEstrazioneController.dateFormat(nuovaEstrazioneController.dataEstrazione)} riferita a <span style="color: red">#{nuovaEstrazioneController.formatAnnoMese(nuovaEstrazioneController.annoMese)}</span></h4>
                                 <p:panelGrid columns="3">
                                     <f:facet name="header">                                        
@@ -57,7 +57,7 @@
                     </ui:fragment>
                     <ui:fragment rendered="#{!nuovaEstrazioneController.permesso}">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-4 p-md-4">
+                            <div class="p-field p-md-6">
                                 <h5>Esiste gi&agrave; un'estrazione storicizzata effettuata nel mese corrente o &egrave; presente un'estrazione in lavorazione.</h5>
                             </div>
                         </div>

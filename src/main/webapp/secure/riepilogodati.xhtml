@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <f:metadata>
+            <f:viewAction action="#{riepilogoController.initialize()}" />
+        </f:metadata>                
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/template/dialog.xhtml">
+            <ui:define name="title">Riepilogo - Dati</ui:define>
+
+            <ui:define name="content">                              
+                <div class="card">
+                    <div class="ui-fluid p-formgrid">
+                        <div class="p-field p-md-6">
+                            <p:outputLabel for="responsabile" value="Responsabile" />
+                            <p:inputText id="responsabile" required="true" value="#{riepilogoDatiController.responsabile}" maxlength="32" requiredMessage="Responsabile obbligatorio!" />
+
+                            <p:outputLabel for="segretario" value="Segretario" />
+                            <p:inputText id="segretario" required="true" value="#{riepilogoDatiController.segretario}" maxlength="32" requiredMessage="Segretario obbligatorio!" />
+                        </div>
+                        <div class="p-d-flex">
+                            <div class="p-mr-2">
+                                <p:commandButton id="conferma" value="Genera" action="#{riepilogoDatiController.conferma()}" styleClass="ui-button-raised" ajax="false" />
+                            </div>
+                            <div class="p-mr-2">
+                                <p:commandButton id="chiudi" action="#{riepilogoDatiController.annulla()}" value="Chiudi" styleClass="ui-button-raised ui-button-secondary" immediate="true" />
+                            </div>
+                        </div>
+                    </div>
+                </div>                                
+                <p:messages escape="false" showIcon="false"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

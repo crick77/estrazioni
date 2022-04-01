@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>USR RENDICONTO - <ui:insert name="title">DIALOG</ui:insert></title>
+        <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" /> 
+        <h:outputScript name="locales/locale-it.js" library="primefaces"/>
+        <link rel="stylesheet" id="layout-css" href="#{request.contextPath}/css/themes/saga-blue.css" />        
+        <link rel="stylesheet" href="#{request.contextPath}/css/styles.css" />
+        <link rel="stylesheet" href="#{request.contextPath}/css/personal-styles.css" />
+        <link rel="icon" type="image/x-icon" href="#{request.contextPath}/images/favicon.ico" />
+    </h:head>
+    <h:body>
+        <h:form id="dialogform">            
+            <div class="layout-main" style="margin-left: 0px !important; padding-top: 0px !important" >
+                <div class="layout-content documentation" id="doc" style="padding-top: 0px !important">
+                    <div class="content-wrapper">
+                        <ui:insert name="content" >
+                            CONTENT
+                        </ui:insert>
+                    </div>
+                </div>                
+            </div>
+        </h:form>
+    </h:body>
+</html>

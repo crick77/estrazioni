@@ -6,7 +6,7 @@
     </context-param>    
     <context-param>
         <param-name>javax.faces.FACELETS_BUFFER_SIZE</param-name>
-        <param-value>65535</param-value> <!-- 64KB. -->
+        <param-value>262144</param-value> <!-- 64KB. -->
     </context-param>
     <context-param>
         <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
@@ -51,7 +51,18 @@
         <filter-name>logFilter</filter-name>
         <servlet-name>facesServlet</servlet-name>       
     </filter-mapping>                
-                                                                                                                                                                                                               
+              
+    <filter>
+        <filter-name>gzipResponseFilter</filter-name>
+        <filter-class>org.omnifaces.filter.GzipResponseFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>gzipResponseFilter</filter-name>
+        <servlet-name>facesServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping> 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
     <session-config>
         <session-timeout>
             30

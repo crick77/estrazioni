@@ -14,7 +14,9 @@ import it.usr.web.estrazioni.producer.EstrazioniLogger;
 import it.usr.web.estrazioni.service.EstrazioniService;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.StringJoiner;
 import javax.faces.application.FacesMessage;
@@ -27,6 +29,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
 import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 
 /**
@@ -90,68 +94,41 @@ public class RiepilogoController extends BaseController {
     }
     
     public void rapporto() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        ExternalContext ec = fc.getExternalContext();
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
-        Estrazione e = es.getEstrazioneById(idEstrazione);        
-        try (PDDocument pdfDocument = PDDocument.load(ec.getResourceAsStream("/WEB-INF/Estrazioni.pdf"))) {
-            PDDocumentCatalog docCatalog = pdfDocument.getDocumentCatalog();
-            PDAcroForm acroForm = docCatalog.getAcroForm();
-            if (acroForm != null) {
-                PDField field = (PDField)acroForm.getField("DATA_ESTRAZIONE");
-                field.setValue(sdf.format(e.getDataestrazione()));
-
-                field = (PDField)acroForm.getField("PERIODO");
-                int[] am = annoMeseSplit(e.getAnnomese());
-                String periodo = ((am[0]<10) ? "0"+am[0] : am[0])+"/"+am[1];
-                field.setValue(periodo);
+        Map<String, Object> options = new HashMap<>();
+        options.put("modal", true);
+        options.put("width", 640);
+        options.put("height", 450);
+        options.put("contentWidth", "100%");
+        options.put("contentHeight", "100%");  
                 
-                for(Dettaglio d : e.getDettaglioList()) {
-                    String fieldName = "ORD"+d.getOrdinanza()+d.getTipo();
-                    
-                    field = (PDField)acroForm.getField(fieldName+"C");
-                    StringJoiner joiner = new StringJoiner(", ");
-                    for(Campione c : d.getCampioneList()) {
-                        joiner.add(String.valueOf(c.getIdpratica()));
-                    }
-                    field.setValue(joiner.toString());
-                    
-                    field = (PDField)acroForm.getField(fieldName+"S");
-                    joiner = new StringJoiner(", ");
-                    for(Pratica p : d.getPraticaList()) {
-                        joiner.add(String.valueOf(p.getIdpratica()));
-                    }
-                    field.setValue(joiner.toString());
-                }
-                                
-                acroForm.flatten();
-            }            
-
-            ec.responseReset();
-            ec.setResponseContentType("application/pdf"); 
-            ec.setResponseHeader("Content-Disposition", "attachment; filename=\"Estrazioni_" + e.getAnnomese() + ".pdf\""); 
-
-            OutputStream output = ec.getResponseOutputStream();
-            pdfDocument.save(output);
-            output.flush();        
-            fc.responseComplete(); 
-            log.debug("File Estrazioni_" + e.getAnnomese()+".pdf generato.");
-            
+        Estrazione e = es.getEstrazioneById(idEstrazione); 
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("estrazione", e);
+        PrimeFaces.current().dialog().openDynamic("riepilogodati", options, null);
+    }
+    
+    public void onDialogClose(SelectEvent event) {
+        String result = (String)event.getObject();
+        if("OK".equalsIgnoreCase(result)) {
             FacesMessage msg = new FacesMessage();
             msg.setSeverity(FacesMessage.SEVERITY_INFO);
             msg.setSummary("Esito");
             msg.setDetail("Rapporto generato!");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-        catch(Exception ioe) {            
+        else if ("KO".equalsIgnoreCase(result)) {
             FacesMessage msg = new FacesMessage();
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             msg.setSummary("Esito");
             msg.setDetail("Impossibile generare il reapporto!");
             FacesContext.getCurrentInstance().addMessage(null, msg);
-            log.debug("Impossibile generare il rapporto: {}", ioe);
-        }           
+        }
+        else {
+            FacesMessage msg = new FacesMessage();
+            msg.setSeverity(FacesMessage.SEVERITY_INFO);
+            msg.setSummary("Esito");
+            msg.setDetail("Operazione annullata!");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }        
     }
     
     public String formatDescrizione(Estrazione e) {

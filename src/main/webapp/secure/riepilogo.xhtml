@@ -19,7 +19,7 @@
                 <ui:fragment rendered="#{riepilogoController.estrazioniPresenti}">
                     <div class="card">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-1 p-md-1">
+                            <div class="p-field p-md-2">
                                 <p:outputLabel value="Estrazioni: " for="@next" />
                                 <p:selectOneMenu id="estrazioni" value="#{riepilogoController.idEstrazione}" hideNoSelectionOption="#{not empty riepilogoController.idEstrazione}">      
                                     <p:ajax process="@this" update="@form" listener="#{riepilogoController.aggiornaRiepilogo()}" />
@@ -27,15 +27,17 @@
                                     <f:selectItems value="#{riepilogoController.estrazioni}" var="e" itemLabel="#{riepilogoController.formatDescrizione(e)}" itemValue="#{e.id}" />
                                 </p:selectOneMenu>
                             </div>      
-                            <div class="p-field p-col-1 p-md-1">
+                            <div class="p-field p-md-2">
                                 <p:outputLabel value="&nbsp;" for="@next" />
                                 <p:commandButton id="export" value="Esporta Excel" styleClass="p-mr-2 p-mb-2" rendered="#{not empty riepilogoController.riepilogo}" icon="pi pi-file-excel">
                                     <p:dataExporter type="xlsxstream" target="riepilogotable" fileName="#{riepilogoController.nomeFile()}"/>
                                 </p:commandButton>
                             </div>
-                            <div class="p-field p-col-1 p-md-1">
+                            <div class="p-field p-md-2">
                                 <p:outputLabel value="&nbsp;" for="@next" />
-                                <p:commandButton id="report" value="Esporta Rapporto" styleClass="p-mr-2 p-mb-2" rendered="#{not empty riepilogoController.riepilogo}" action="#{riepilogoController.rapporto()}" ajax="false" icon="pi pi-file-pdf" />
+                                <p:commandButton id="report" value="Esporta Rapporto" styleClass="p-mr-2 p-mb-2" rendered="#{not empty riepilogoController.riepilogo}" action="#{riepilogoController.rapporto()}" icon="pi pi-file-pdf">
+                                    <p:ajax event="dialogReturn" listener="#{riepilogoController.onDialogClose}" update="@form" />
+                                </p:commandButton>
                             </div>                            
                         </div>
                     </div>                    
@@ -43,18 +45,18 @@
                 <ui:fragment id="riepilogo" rendered="#{not empty riepilogoController.riepilogo}">
                     <div class="card">  
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-12 p-md-12">  
-                                <p:dataTable id="riepilogotable" value="#{riepilogoController.riepilogo}" var="r" showGridlines="true" rowStyleClass="#{riepilogoController.rowStyle(r)}">                                        
-                                    <p:column headerText="ORDINANZA/TIPO" groupRow="true">
+                            <div class="p-field p-md-12">  
+                                <p:dataTable id="riepilogotable" value="#{riepilogoController.riepilogo}" var="r" showGridlines="true" rowStyleClass="#{riepilogoController.rowStyle(r)}" size="small">                                        
+                                    <p:column headerText="ORDINANZA / TIPO" groupRow="true" width="8%">
                                         <h:outputText value="#{r.ordinanza}" />/<h:outputText value="#{r.tipo}" />
                                     </p:column> 
-                                    <p:column headerText="ID PRATICA">
+                                    <p:column headerText="ID PRATICA" width="4%">
                                         <h:outputText value="#{r.idpratica}" />
                                     </p:column>
-                                    <p:column headerText="INTESTATARIO">
+                                    <p:column headerText="INTESTATARIO" width="12%">
                                         <h:outputText value="#{r.intestatario}" />
                                     </p:column>
-                                    <p:column headerText="COMUNE">
+                                    <p:column headerText="COMUNE" width="15%">
                                         <h:outputText value="#{r.comune}" />
                                     </p:column>
                                     <p:column headerText="INDIRIZZO">
@@ -63,7 +65,7 @@
                                     <p:column headerText="TECNICO">
                                         <h:outputText value="#{r.tecnico}" />
                                     </p:column>
-                                    <p:column headerText="PEC TECNICO">
+                                    <p:column headerText="PEC TECNICO" width="20%">
                                         <h:outputText value="#{r.pectecnico}" />
                                     </p:column>
 
@@ -76,7 +78,7 @@
                 <ui:fragment rendered="#{!riepilogoController.estrazioniPresenti}">
                     <div class="card">
                         <div class="ui-fluid p-formgrid p-grid">
-                            <div class="p-field p-col-4 p-md-4">
+                            <div class="p-field p-md-6">
                                 <h3>Non esistono estrazioni in archivio. Effettuarne una nuova.</h3>
                             </div>
                         </div>
