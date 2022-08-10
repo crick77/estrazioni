@@ -82,7 +82,16 @@
                                     <br/>
                                     <h:outputText value="L'estrazione non sarà più modificabile."/>
                                 </p:tooltip>
+                            </div>
+                            <div class="p-field p-md-1">
+                                &nbsp;
                             </div>                            
+                            <div class="p-field p-md-1">
+                                <p:commandButton id="delete" value="Elimina" icon="pi pi-trash" styleClass="ui-button-danger" action="#{lavorazioneController.elimina()}" update="msg">
+                                    <p:confirm type="popup" header="Conferma" message="Sicuri di voler procedere con l'eliminazione?" icon="pi pi-exclamation-triangle"/>
+                                </p:commandButton>
+                                <p:tooltip for="delete" value="Elimina l'estrazione in lavorazione permettendo di rieseguirla." position="right"/>
+                            </div>                           
                         </div>
                         <h6>
                             <h:outputText value="* L'estrazione ha generato un numero inferiore di elementi a causa di ripetizioni e/o estrazioni gi&agrave; presenti nel periodo precedente." styleClass="red" />
@@ -90,6 +99,10 @@
                             <h:outputText value="Il valore indicato tra parentesi indica il numero minimo di pratiche che dovrebbero essere sorteggiate." styleClass="red" />
                         </h6>
                     </div>
+                    <p:confirmPopup global="true">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirm-popup-yes" />
+                    </p:confirmPopup>
                     <p:growl id="msg" showDetail="true" escape="false"/>
                 </ui:fragment>
                 <ui:fragment rendered="#{!lavorazioneController.presente}">

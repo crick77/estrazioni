@@ -30,6 +30,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -339,5 +340,21 @@ public class EstrazioniService {
                 .setParameter("idpratica", idPratica)
                 .getSingleResult();
         return count>0;
+    }
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void elimina() {
+        Estrazione e = em.createQuery("SELECT e FROM Estrazione e WHERE e.storicizzata = 0", Estrazione.class).getSingleResult();
+        
+        Query q = em.createQuery("DELETE FROM LavCampione lc WHERE lc.annomese = :annomese").setParameter("annomese", e.getAnnomese());
+        q.executeUpdate();
+        
+        q = em.createQuery("DELETE FROM LavPratica lp WHERE lp.annomese = :annomese").setParameter("annomese", e.getAnnomese());
+        q.executeUpdate();
+        
+        for(Dettaglio d : e.getDettaglioList()) {
+            em.remove(d);
+        }
+        em.remove(e);
     }
 }

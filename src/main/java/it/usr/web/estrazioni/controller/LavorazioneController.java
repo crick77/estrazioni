@@ -315,7 +315,7 @@ public class LavorazioneController extends BaseController {
     }  
     
     private void dbSave() {
-        java.sql.Date _de = new java.sql.Date(dataEstrazione.getTime());
+        //java.sql.Date _de = new java.sql.Date(dataEstrazione.getTime());
         
         es.ripulisciEstrazione();
         es.salvaLavoro(ord100A.getSource(), ord100A.getTarget(), annoMese, 100, "A");
@@ -324,5 +324,11 @@ public class LavorazioneController extends BaseController {
         es.salvaLavoro(ord59A.getSource(), ord59A.getTarget(), annoMese, 59, "A");
         es.salvaLavoro(ord59B.getSource(), ord59B.getTarget(), annoMese, 59, "B");
         es.salvaLavoro(ord59C.getSource(), ord59C.getTarget(), annoMese, 59, "C"); 
+    }
+    
+    public String elimina() {
+        es.elimina();
+        
+        return redirect("estrazioni");
     }
 }
