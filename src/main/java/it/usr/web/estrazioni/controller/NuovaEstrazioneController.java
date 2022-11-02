@@ -45,8 +45,8 @@ public class NuovaEstrazioneController extends BaseController {
     Random RAND = new Random();
     
     public void initialize() {        
-        LocalDate _dataEstrazione = LocalDate.now();
-        LocalDate dataRiferimento = _dataEstrazione.minusMonths(1);
+        LocalDate _dataEstrazione = LocalDate.now();      
+        LocalDate dataRiferimento = _dataEstrazione.minusMonths(1);        
         annoMese = dataRiferimento.format(DateTimeFormatter.ofPattern("YYYY"))+dataRiferimento.format(DateTimeFormatter.ofPattern("MM"));
         
         permesso = (es.getEstrazioneNonStoricizzata()==null && es.getEstrazioneAnnoMese(annoMese)==null);
